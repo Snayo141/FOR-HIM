@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Message</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffe6f0);
+      text-align: center;
+      overflow: hidden;
+      border: 15px solid pink;
+      border-radius: 20px;
+      position: relative;
+    }
+    #container {
+      max-width: 600px;
+      position: relative;
+      z-index: 10;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 20px;
+      margin: 10px;
+      cursor: pointer;
+      border: 2px solid #ff69b4;
+      border-radius: 12px;
+      background: linear-gradient(to bottom, #ffb6c1, #ffc0cb);
+      color: #fff;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px rgba(255,105,180,0.4);
+    }
+    button:hover {
+      transform: scale(1.15) rotate(-2deg);
+      box-shadow: 0 6px 12px rgba(255,105,180,0.7);
+    }
+    .page {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #noBtn, #noBtn2, #noBtn5, #noBtn6, #noBtnA, #noBtnB, #noBtnC, #noBtnD, #noBtnE, #noBtnF {
+      position: absolute;
+      background: linear-gradient(to bottom, #ff6f91, #ff91b2);
+      border: 2px solid #ff1493;
+      border-radius: 12px;
+      color: #fff;
+    }
+    .heart, .floating-heart {
+      font-size: 40px;
+      position: absolute;
+      animation: float 3s infinite ease-in-out;
+    }
+    .flash {
+      font-size: 40px;
+      color: red;
+      animation: flash 1s infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(20deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    @keyframes flash {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .sparkle {
+      position: absolute;
+      color: #ff69b4;
+      font-size: 24px;
+      animation: sparkleAnim 2s infinite;
+    }
+    @keyframes sparkleAnim {
+      0%,100% { opacity: 1; transform: scale(1) translateY(0); }
+      50% { opacity: 0; transform: scale(1.5) translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Pages 1-4: your text content here -->
+
+    <!-- Yes/No Pages A-F -->
+    <div id="pageA" class="page" style="display:none;">
+      <h2>Are you willing to give our relationship a second chance?</h2>
+      <button onclick="nextPage('pageB')">Yes</button>
+      <button id="noBtnA" onmouseover="moveNo('noBtnA')">No</button>
+    </div>
+
+    <div id="pageB" class="page" style="display:none;">
+      <h2>Do you promise to always communicate your feelings with me and to let me know when I am not fulfilling my role as your girlfriend?</h2>
+      <button onclick="nextPage('pageC')">Yes</button>
+      <button id="noBtnB" onmouseover="moveNo('noBtnB')">No</button>
+    </div>
+
+    <div id="pageC" class="page" style="display:none;">
+      <h2>Will you be my boyfriend, again?</h2>
+      <button onclick="nextPage('pageD')">Yes</button>
+      <button id="noBtnC" onmouseover="moveNo('noBtnC')">No</button>
+    </div>
+
+    <div id="pageD" class="page" style="display:none;">
+      <h2>Do you promise to spend the rest of your life with me?</h2>
+      <button onclick="nextPage('pageE')">Yes</button>
+      <button id="noBtnD" onmouseover="moveNo('noBtnD')">No</button>
+    </div>
+
+    <div id="pageE" class="page" style="display:none;">
+      <h2>I will love you forever, you will never get tired of me, right?</h2>
+      <button onclick="nextPage('pageF')">Yes</button>
+      <button id="noBtnE" onmouseover="moveNo('noBtnE')">No</button>
+    </div>
+
+    <div id="pageF" class="page" style="display:none;">
+      <h2>Clean slate?</h2>
+      <button onclick="nextPage('final')">Yes</button>
+      <button id="noBtnF" onmouseover="moveNo('noBtnF')">No</button>
+    </div>
+
+    <!-- Final Page -->
+    <div id="final" class="page" style="display:none;">
+      <div class="heart">❤️</div>
+      <div class="flash">I LOVE YOU</div>
+    </div>
+
+  </div>
+
+<script>
+function nextPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  document.getElementById(pageId).style.display = 'block';
+}
+
+function moveNo(btnId) {
+  const btn = document.getElementById(btnId);
+  btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+  btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+  btn.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+}
+
+// Floating hearts animation
+for(let i=0;i<30;i++){
+  let heart = document.createElement('div');
+  heart.className = 'floating-heart';
+  heart.style.left = Math.random()*window.innerWidth+'px';
+  heart.style.top = Math.random()*window.innerHeight+'px';
+  heart.innerText = '💓';
+  heart.style.animationDuration = (2+Math.random()*3)+'s';
+  document.body.appendChild(heart);
+}
+
+// Sparkles
+for(let i=0;i<20;i++){
+  let sparkle = document.createElement('div');
+  sparkle.className = 'sparkle';
+  sparkle.style.left = Math.random()*window.innerWidth+'px';
+  sparkle.style.top = Math.random()*window.innerHeight+'px';
+  sparkle.innerText = '✨';
+  sparkle.style.animationDuration = (1+Math.random()*2)+'s';
+  document.body.appendChild(sparkle);
+}
+</script>
+</body>
+</html>
